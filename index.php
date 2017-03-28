@@ -30,12 +30,23 @@ echo  $aluno;
 
 */
 
-
+// ----------- ATUALIZAR REGISTRO --------------
+/*
 
 $prof = new Usuario();
 $prof->loadById(9);
 $prof->update('Teste 123', 'teste@teste.com.br', '1234');
 
 echo $prof;
+
+*/
+
+// ----------- EXCLUIR REGISTRO --------------
+
+$del = new Usuario();
+$del->loadById(9);
+$del->delete();
+
+echo $del;
 
  ?>

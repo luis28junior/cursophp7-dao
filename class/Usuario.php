@@ -133,6 +133,17 @@ class Usuario{
 			'SENHA'=>$this->getSenha(),
 			'ID'=>$this->getId()));
 	}
+
+	public function delete(){
+		$sql = new Sql();
+		$sql->query("DELETE FROM user WHERE id = :ID", array("ID"=>$this->getId()));
+
+		$this->setId(0);
+		$this->setName("");
+		$this->setEmail("");
+		$this->setSenha("");
+		$this->setDtcadastro(new DateTime());
+	}
 }
 
 ?>
