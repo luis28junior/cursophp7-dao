@@ -59,7 +59,6 @@ class Usuario{
 			$this->setEmail($row['email']);
 			$this->setSenha($row['pass']);
 			$this->setDtcadastro(new DateTime($row['dtcadastro']));
-
 		}
 
 	}
@@ -74,6 +73,36 @@ class Usuario{
 			));
 	}
 
+
+	public static function search($email){
+		$sql = new Sql();
+		return $sql->select ("select * from user where email like :EMAIL order by name", array('EMAIL'=> '%'. $email . '%'));
+	}
+
+	public static function getList(){
+		$sql = new Sql();		
+		return $sql->select('SELECT * FROM user Order by id');
+	}
+
+
+	public function login($user, $pass) {
+		$sql = new Sql();
+		$results = $sql->select("SELECT * FROM user WHERE email = :EMAIL and pass = :SENHA", 
+			array("EMAIL"=>$user,
+			      "SENHA"=>$pass));
+
+		if(isset($results[0])){
+			$row = $results[0];
+			$this->setId($row['id']);
+			$this->setName($row['name']);
+			$this->setEmail($row['email']);
+			$this->setSenha($row['pass']);
+			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+		}else {
+			throw new Exception("Login e/ ou Senha Inválidos", 1);
+			
+		}
+	}
 }
 
 ?>
